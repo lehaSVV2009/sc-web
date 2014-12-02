@@ -36,6 +36,8 @@ ScKeynodes.prototype.init = function() {
         
     ).done(function() {
         dfd.resolve();
+    }).fail(function() {
+        throw "Can't resolve keynode";
     });
     
     return dfd.promise();
@@ -44,6 +46,8 @@ ScKeynodes.prototype.init = function() {
 ScKeynodes.prototype.resolveKeynode = function(sys_idtf, property) {
     var dfd = new jQuery.Deferred();
     var self = this;
+    
+    console.log('Resolve keynode: ' + sys_idtf);
     
     this.sctp_client.find_element_by_system_identifier(sys_idtf).done(function(res) {
       
